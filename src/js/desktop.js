@@ -118,7 +118,7 @@ function layout() {
   const [SW, SH] = dims();
   const scale = S.font.base / 12;
   const barH = Math.round(S.bar.size * scale);
-  const go = S.hypr.gaps_out, gi = S.hypr.gaps_in;
+  const go = S.hypr.gaps_out, sh = sharedBorders() ? S.hypr.border_size : 0, gi = S.hypr.gaps_in;
   const area = { x: go, y: (S.bar.position === 'top' ? barH : 0) + go, w: SW - 2 * go, h: SH - barH - 2 * go };
   Object.values(W).forEach(w => w.el.style.display = 'none');
   const ids = WS[cur];
@@ -133,10 +133,10 @@ function layout() {
   ids.forEach((id, i) => {
     const q = rects[i], e = W[id].el;
     // gaps_in on edges shared with another window, gaps_out already applied on screen edges
-    const L = q.x > area.x + .5 ? gi : 0, T = q.y > area.y + .5 ? gi : 0, R = q.x + q.w < area.x + area.w - .5 ? gi : 0, B = q.y + q.h < area.y + area.h - .5 ? gi : 0;
+    const L = q.x > area.x + .5 ? gi : 0, T = q.y > area.y + .5 ? gi : 0, R = q.x + q.w < area.x + area.w - .5 ? gi - sh : 0, B = q.y + q.h < area.y + area.h - .5 ? gi - sh : 0;
     e.style.display = '';
     Object.assign(e.style, { left: (q.x + L) + 'px', top: (q.y + T) + 'px', width: (q.w - L - R) + 'px', height: (q.h - T - B) + 'px' });
-    e.classList.toggle('focus', FOCUS[cur] === id);
+    e.classList.toggle('focus', FOCUS[cur] === id); e.style.zIndex = FOCUS[cur] === id ? 2 : 1;
   });
   // workspaces
   const ws = $('#ws'); ws.innerHTML = '';

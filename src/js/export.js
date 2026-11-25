@@ -19,7 +19,7 @@ local inactive_border_color = "${inact.hypr}"
 
 hl.config({
   general = {
-    gaps_in = ${S.hypr.gaps_in},
+    gaps_in = ${sharedBorders() ? `{ top = 0, right = -${S.hypr.border_size}, bottom = -${S.hypr.border_size}, left = 0 }` : S.hypr.gaps_in},
     gaps_out = ${S.hypr.gaps_out},
     border_size = ${S.hypr.border_size},
     col = {
