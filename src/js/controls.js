@@ -142,7 +142,7 @@ function buildPanel() {
 /* ---------------- presets ---------------- */
 function buildPresets() {
   const p = $('#preset'); p.innerHTML = '';
-  const own = el('optgroup', { label: 'Studio' }, el('option', { value: 'studio-dark' }, 'Studio Dark'), el('option', { value: 'studio-light' }, 'Studio Light'));
+  const own = el('optgroup', { label: 'Studio' }, Object.entries(STUDIO).map(([k, v]) => el('option', { value: k }, v.label)));
   const stock = el('optgroup', { label: 'Omarchy themes' }, Object.keys(STOCK).map(k => el('option', { value: k }, k.replace(/-/g, ' '))));
   p.append(el('option', { value: '', disabled: '' }, 'Start from…'), own, stock);
   p.value = S.preset || '';
@@ -150,10 +150,11 @@ function buildPresets() {
   withInfo(p, 'Start from', 'Studio presets are monochrome with no gaps and 1px lines. Omarchy themes load the real colors of the themes installed on your machine, plus Omarchy’s default layout.');
 }
 function loadPreset(k) {
-  const isStudio = k.startsWith('studio');
-  const src = k === 'studio-dark' ? STUDIO_DARK : k === 'studio-light' ? STUDIO_LIGHT : STOCK[k];
+  const isStudio = k in STUDIO;
+  const src = isStudio ? STUDIO[k].colors : STOCK[k];
   S.colors = {}; KEYS.forEach(x => S.colors[x] = src[x] || '#808080'); S.colors.mode = src.mode || 'dark';
   Object.assign(S, structuredClone(isStudio ? LAYOUT_STUDIO : LAYOUT_OMARCHY));
+  if (isStudio) Object.assign(S.hypr, STUDIO[k].hypr);
   if (!isStudio && src.hyprland_active_border) { const parts = src.hyprland_active_border.match(/rgba?\(([0-9a-f]{6})/gi) || []; const cols = parts.map(p => '#' + p.slice(-6)); const ang = (src.hyprland_active_border.match(/(\d+)deg/) || [])[1]; S.border.mode = cols.length > 1 ? 'gradient' : 'solid'; S.border.c1 = cols[0]; S.border.c2 = cols[1] || null; S.border.angle = ang ? +ang : 0; }
   if (!isStudio && src.hyprland_inactive_border) { const m = src.hyprland_inactive_border.match(/rgba?\(([0-9a-f]{6})([0-9a-f]{2})?/i); if (m) { S.border.inactive = '#' + m[1]; S.border.inactiveAlpha = m[2] ? +(parseInt(m[2], 16) / 255).toFixed(2) : 1; } }
   S.wall = { kind: isStudio ? 'grid' : 'dots', color: null, ink: null, density: isStudio ? 48 : 28, image: null };
