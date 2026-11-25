@@ -1,5 +1,9 @@
 # Omarchy Theme Studio
 
+**[Open the studio →](https://schmidsi.github.io/omarchy-theme-studio/)**
+
+![Omarchy Theme Studio with the Studio Light preset](docs/screenshot.png)
+
 A browser-based theme designer for [Omarchy](https://omarchy.org). The panel on the left edits
 colors, fonts, gaps, borders, rounding, the bar and the shell; the right side is a mocked Omarchy
 desktop (Hyprland dwindle layout, bar, launcher, menu, notifications, OSD, lock screen) that
@@ -8,7 +12,8 @@ renders the theme live. Export produces the files Omarchy reads (`colors.toml`, 
 
 ## Run
 
-No build step and no dependencies. Open `src/index.html` in a browser.
+Use it online at https://schmidsi.github.io/omarchy-theme-studio/, or locally: there is no build step
+and no dependencies, so just open `src/index.html` in a browser.
 
 Keys in the preview: click the desktop, then Alt stands in for Super
 (Alt Enter terminal, Alt Space launcher, Alt W close, Alt 1–5 workspaces, Alt J cycle focus).
@@ -29,7 +34,7 @@ src/
   js/export.js      export/import of theme files and install.sh
   js/main.js        boot
 scripts/
-  build.py          inlines src/ into one dist/index.html (for single-file hosting)
+  build.py          inlines src/ into one dist/index.html (deployed to GitHub Pages on every push)
   extract-themes.py regenerates js/themes.js from /usr/share/omarchy/themes
 ```
 
