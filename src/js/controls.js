@@ -160,6 +160,7 @@ function loadPreset(k) {
   if (!isStudio && src.hyprland_inactive_border) { const m = src.hyprland_inactive_border.match(/rgba?\(([0-9a-f]{6})([0-9a-f]{2})?/i); if (m) { S.border.inactive = '#' + m[1]; S.border.inactiveAlpha = m[2] ? +(parseInt(m[2], 16) / 255).toFixed(2) : 1; } }
   S.wall = { kind: isStudio ? 'grid' : 'dots', color: null, ink: null, density: isStudio ? 48 : 28, image: null };
   S.preset = k; S.name = isStudio ? k : k + '-custom';
+  $("#preset").value = k;
   $('#themeName').value = S.name;
   painters.forEach(p => p()); apply(); save();
 }
