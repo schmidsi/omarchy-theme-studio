@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Omarchy Theme Studio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400;700&family=Fira+Code:wght@400;700&family=Source+Code+Pro:wght@400;700&family=Roboto+Mono:wght@400;700&family=Geist+Mono:wght@400;700&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="css/panel.css">
+<link rel="stylesheet" href="css/desktop.css">
+<div class="app">
+  <aside class="panel" aria-label="Theme settings">
+    <div class="panel-head">
+      <div class="brand"><b>Omarchy Theme Studio</b><span>colors.toml · hyprland · shell</span></div>
+      <div class="row" style="grid-template-columns:1fr 1fr">
+        <input class="field" id="themeName" aria-label="Theme name" spellcheck="false">
+        <select class="field" id="preset" aria-label="Start from preset"></select>
+      </div>
+    </div>
+    <div class="scroll" id="controls"></div>
+    <div class="info" id="info" aria-live="polite"><b>Info</b><p>Hover any setting to see what it does and which Omarchy file it ends up in.</p></div>
+    <div class="panel-foot">
+      <button class="btn" id="importBtn">Import</button>
+      <button class="btn primary" id="exportBtn">Export theme</button>
+    </div>
+  </aside>
+
+  <main class="stage">
+    <div class="toolbar" role="toolbar" aria-label="Desktop actions">
+      <button class="tb" data-act="term">Terminal <kbd>Alt ⏎</kbd></button>
+      <button class="tb" data-act="launcher">Launcher <kbd>Alt Space</kbd></button>
+      <button class="tb" data-act="close">Close <kbd>Alt W</kbd></button>
+      <button class="tb" data-act="notify">Notify <kbd>Alt N</kbd></button>
+      <button class="tb" data-act="osd">Volume <kbd>Alt V</kbd></button>
+      <button class="tb" data-act="lock">Lock <kbd>Alt L</kbd></button>
+      <div class="spacer"></div>
+      <span class="meta" id="meta"></span>
+    </div>
+    <div class="viewport" id="viewport" tabindex="0" aria-label="Desktop preview. Click to focus, Alt stands in for Super.">
+      <div class="frame" id="frame"><div id="desk"></div></div>
+      <div class="hint">Click the desktop, then use Alt as Super · Alt 1–5 workspaces · Alt J cycle focus</div>
+    </div>
+  </main>
+</div>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="box2">
+    <header><b id="sheetTitle">Export</b><button class="btn" id="sheetClose">Close</button></header>
+    <div class="tabs2" id="tabs" role="tablist"></div>
+    <pre id="code" tabindex="0"></pre>
+    <footer><p id="sheetNote"></p><button class="btn" id="copyFile">Copy file</button><button class="btn primary" id="copyAll">Copy install command</button></footer>
+  </div>
+</div>
+<script src="js/themes.js"></script>
+<script src="js/color.js"></script>
+<script src="js/state.js"></script>
+<script src="js/controls.js"></script>
+<script src="js/desktop.js"></script>
+<script src="js/render.js"></script>
+<script src="js/export.js"></script>
+<script src="js/main.js"></script>
