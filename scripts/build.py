@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Inline src/ into a single self-contained dist/index.html (used for the published artifact)."""
-import re
+import re, shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -13,4 +13,5 @@ html = re.sub(r'<script src="(js/[^"]+)"></script>',
               lambda m: '<script>\n' + (SRC / m.group(1)).read_text() + '</script>', html)
 DIST.mkdir(exist_ok=True)
 (DIST / 'index.html').write_text(html)
+shutil.copy(ROOT / 'docs/og.png', DIST / 'og.png')  # social preview image, referenced by og:image
 print(f'dist/index.html  {len(html) // 1024} KB')
