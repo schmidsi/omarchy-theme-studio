@@ -34,7 +34,7 @@ const blocks = (from, to) => Array.from({ length: to - from + 1 }, (_, i) => `<s
 const CONTENT = {
   fetch: () => [
     promptLine('fastfetch'),
-    `${S_('ca b', '      ▄▄▄▄▄▄▄▄▄▄▄▄▄      ')}   ${S_('ca b', 'simon')}@${S_('ca b', 'omarchy')}`,
+    `${S_('ca b', '      ▄▄▄▄▄▄▄▄▄▄▄▄▄      ')}   ${S_('ca b', 'user')}@${S_('ca b', 'omarchy')}`,
     `${S_('ca b', '   ▄█▀▀▀▀▀▀▀▀▀▀▀▀▀▀█▄   ')}   ${S_('c8', '─────────────────')}`,
     `${S_('ca b', '  ██  ▄▄▄▄▄▄▄▄▄▄▄   ██  ')}   ${S_('c4', 'OS')}       Omarchy 4`,
     `${S_('ca b', '  ██  ██       ██   ██  ')}   ${S_('c4', 'Kernel')}   7.2.15-arch1-1-t2`,
@@ -50,11 +50,11 @@ const CONTENT = {
   ].join('\n'),
   ls: () => [
     promptLine('ls -l'),
-    `${S_('c4 b', 'drwxr-xr-x')} ${S_('c3', 'simon')} ${S_('c2', '  4.0k')} ${S_('c8', 'Nov 25 13:02')} ${S_('c4 b', 'backgrounds')}`,
-    `${S_('c7', '.rw-r--r--')} ${S_('c3', 'simon')} ${S_('c2', '   612')} ${S_('c8', 'Nov 25 13:04')} colors.toml`,
-    `${S_('c7', '.rw-r--r--')} ${S_('c3', 'simon')} ${S_('c2', '   388')} ${S_('c8', 'Nov 25 13:04')} hyprland.lua`,
-    `${S_('c2 b', '.rwxr-xr-x')} ${S_('c3', 'simon')} ${S_('c2', '  1.2k')} ${S_('c8', 'Nov 25 12:41')} ${S_('c2 b', 'install.sh')}`,
-    `${S_('c6', 'lrwxrwxrwx')} ${S_('c3', 'simon')} ${S_('c2', '     -')} ${S_('c8', 'Nov 24 18:20')} ${S_('c6', 'current')} → ${S_('c4', '../themes/studio')}`,
+    `${S_('c4 b', 'drwxr-xr-x')} ${S_('c3', 'user')} ${S_('c2', '  4.0k')} ${S_('c8', 'Nov 25 13:02')} ${S_('c4 b', 'backgrounds')}`,
+    `${S_('c7', '.rw-r--r--')} ${S_('c3', 'user')} ${S_('c2', '   612')} ${S_('c8', 'Nov 25 13:04')} colors.toml`,
+    `${S_('c7', '.rw-r--r--')} ${S_('c3', 'user')} ${S_('c2', '   388')} ${S_('c8', 'Nov 25 13:04')} hyprland.lua`,
+    `${S_('c2 b', '.rwxr-xr-x')} ${S_('c3', 'user')} ${S_('c2', '  1.2k')} ${S_('c8', 'Nov 25 12:41')} ${S_('c2 b', 'install.sh')}`,
+    `${S_('c6', 'lrwxrwxrwx')} ${S_('c3', 'user')} ${S_('c2', '     -')} ${S_('c8', 'Nov 24 18:20')} ${S_('c6', 'current')} → ${S_('c4', '../themes/studio')}`,
     promptLine('git log --oneline -4'),
     `${S_('c3', 'a3f9c1e')} ${S_('c6 b', '(HEAD → main)')} Tighten gaps to 0, 1px lines`,
     `${S_('c3', '7b20d4f')} Grayscale ANSI palette`,
@@ -152,7 +152,7 @@ function tick() {
   $('#lclock').textContent = `${hh}:${mm}`; $('#ldate').textContent = `${DAYS[d.getDay()]}, ${d.getDate()} ${MONTHS[d.getMonth()]}`;
 }
 const cpuHist = Array.from({ length: 90 }, () => 20 + Math.random() * 30);
-const PROCS = [['1204', 'Hyprland', 'simon', 4.1, 212], ['2311', 'ghostty', 'simon', 2.6, 148], ['2318', 'nvim', 'simon', 1.2, 96], ['981', 'quickshell', 'simon', 0.9, 182], ['3120', 'chromium', 'simon', 7.4, 1420], ['3122', 'claude', 'simon', 3.3, 410], ['640', 'pipewire', 'simon', 0.4, 38], ['1', 'systemd', 'root', 0.1, 14], ['2290', 'btop', 'simon', 0.6, 9], ['771', 'NetworkManager', 'root', 0.1, 22]];
+const PROCS = [['1204', 'Hyprland', 'user', 4.1, 212], ['2311', 'ghostty', 'user', 2.6, 148], ['2318', 'nvim', 'user', 1.2, 96], ['981', 'quickshell', 'user', 0.9, 182], ['3120', 'chromium', 'user', 7.4, 1420], ['3122', 'claude', 'user', 3.3, 410], ['640', 'pipewire', 'user', 0.4, 38], ['1', 'systemd', 'root', 0.1, 14], ['2290', 'btop', 'user', 0.6, 9], ['771', 'NetworkManager', 'root', 0.1, 22]];
 function btopTick() {
   cpuHist.push(clamp(cpuHist[cpuHist.length - 1] + (Math.random() - .5) * 22, 4, 96)); cpuHist.shift();
   document.querySelectorAll('#desk [data-graph]').forEach(g => { if (g.children.length !== cpuHist.length) g.innerHTML = cpuHist.map(() => '<i></i>').join(''); [...g.children].forEach((b, i) => b.style.height = cpuHist[i] + '%'); });
